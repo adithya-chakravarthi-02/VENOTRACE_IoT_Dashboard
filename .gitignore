@@ -1,0 +1,25 @@
+﻿# Python
+.venv/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*.class
+*.pyd
+
+# Local Database & Cache
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/*.csv
+
+# Environment & IDE
+.env
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log

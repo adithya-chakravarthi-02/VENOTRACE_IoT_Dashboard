@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VENOTRACE | Research Dashboard</title>
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#15223a;--line:#263650;--text:#eef4ff;--muted:#9aacc5;--cyan:#6be4d4;--blue:#79a9ff;--orange:#ffbd75;--pink:#f59ad8;--green:#73ddb0;--red:#ff8d91;--shadow:0 14px 45px rgba(0,0,0,.18)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 500px at 10% -10%,#17294b 0%,transparent 65%),var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:9px 13px;color:var(--text);background:#1b2b47;transition:.16s}button:hover{filter:brightness(1.15)}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--cyan);color:#052d32;border-color:transparent;font-weight:750}.subtle{background:transparent}.danger{color:#ffcbcb;border-color:#653b4a;background:#341d2b}.wrap{max-width:1500px;margin:0 auto;padding:24px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:20px}.brand{display:flex;align-items:center;gap:14px}.logo{display:grid;place-items:center;width:48px;height:48px;background:linear-gradient(135deg,#69e6d5,#5c91ff);color:#07152a;border-radius:15px;font-weight:900;font-size:15px;letter-spacing:-1px;box-shadow:0 8px 30px #49bdd333}.kicker{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--cyan);font-weight:800}.title{font-size:27px;line-height:1.2;margin:3px 0 4px;letter-spacing:-.04em}.subtitle{color:var(--muted);font-size:13px}.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:11px;color:var(--muted);background:#101a2a}.dot{width:7px;height:7px;border-radius:50%;background:#71829b}.dot.good{background:var(--green);box-shadow:0 0 0 4px #73ddb017}.dot.bad{background:var(--red)}.dot.warn{background:var(--orange)}.notice{display:flex;gap:13px;padding:14px 16px;border:1px solid #6c5536;background:#281f19;color:#f7d6a5;border-radius:13px;margin-bottom:20px}.notice strong{display:block;color:#ffe5bb;margin-bottom:2px}.notice p{margin:0;color:#ddc39e;font-size:12px}.icon{font-size:19px;line-height:1.3}.grid{display:grid;gap:14px}.status-grid{grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:14px}.reading-grid{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:14px}.card{border:1px solid var(--line);background:linear-gradient(155deg,#111c30,#101827);border-radius:16px;padding:17px;box-shadow:var(--shadow);min-width:0}.stat-label{color:var(--muted);font-size:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}.stat-value{font-size:21px;font-weight:760;letter-spacing:-.025em;margin:11px 0 3px;overflow-wrap:anywhere}.stat-foot{font-size:11px;color:var(--muted)}.status-word{font-size:16px}.section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px}.section-head h2{font-size:16px;letter-spacing:-.02em;margin:0 0 3px}.section-head p{margin:0;font-size:12px;color:var(--muted)}.section-tag{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);border:1px solid #28504f;padding:4px 8px;border-radius:7px;white-space:nowrap}.connect-grid{grid-template-columns:1.25fr 1fr 1fr auto auto;align-items:end}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field label{font-size:11px;color:var(--muted);font-weight:650}.field input,.field select{width:100%;border:1px solid var(--line);color:var(--text);background:#0c1525;border-radius:9px;padding:10px 11px;min-width:0;outline:none}.field input:focus,.field select:focus{border-color:#68d7d0}.field small{color:var(--muted);font-size:10px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.section{margin-top:14px}.charts-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.chart-card{min-height:270px}.chart-sub{font-size:11px;color:var(--muted)}canvas{display:block;width:100%;height:188px;margin-top:8px}.chart-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:6px}.legend-item{display:flex;align-items:center;gap:6px}.swatch{height:3px;width:16px;border-radius:4px;display:inline-block}.lower-grid{grid-template-columns:minmax(0,1.6fr) minmax(290px,.8fr)}.table-wrap{overflow:auto;max-width:100%;border:1px solid var(--line);border-radius:10px}table{border-collapse:collapse;width:100%;min-width:760px;font-size:11px}th,td{padding:10px 11px;text-align:left;border-bottom:1px solid #24334c;white-space:nowrap}th{background:#14213a;color:#a9bdd7;font-weight:700;position:sticky;top:0}td{color:#dce8f9}tbody tr:hover{background:#182740}tbody tr:last-child td{border-bottom:0}.pill{display:inline-flex;padding:3px 7px;border-radius:7px;font-size:10px;font-weight:700;background:#203149;color:#b9d0ee}.pill.ok{background:#15382f;color:#9af0ce}.pill.warn{background:#3c3020;color:#f8cc86}.pill.bad{background:#48252d;color:#ffacb2}.empty{color:var(--muted);text-align:center;padding:25px}.side-stack{display:flex;flex-direction:column;gap:14px}.session-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.session-grid .full{grid-column:1/-1}.help{border:1px dashed #394b67;border-radius:10px;padding:11px;color:var(--muted);font-size:11px;margin-top:12px}.help strong{color:var(--text)}.key-list{display:grid;gap:8px}.key-row{display:flex;justify-content:space-between;gap:10px;font-size:12px;border-bottom:1px solid #22314a;padding-bottom:8px}.key-row:last-child{border-bottom:0;padding-bottom:0}.key-row span:first-child{color:var(--muted)}.logs{display:flex;flex-direction:column;gap:9px;max-height:230px;overflow:auto}.log{border-left:2px solid #4d6689;padding:2px 0 2px 9px;font-size:11px;color:#c6d4e8;overflow-wrap:anywhere}.log time{display:block;color:#7188a7;font-size:10px}.exports{display:flex;gap:8px;flex-wrap:wrap}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#71839e;font-size:11px;padding:24px 2px 10px}.toast{position:fixed;right:20px;bottom:20px;z-index:10;max-width:380px;padding:12px 15px;border:1px solid #36536d;background:#14253a;border-radius:12px;box-shadow:var(--shadow);display:none}.toast.show{display:block}.backend-error{color:var(--red);font-size:12px;white-space:pre-wrap;margin-top:8px}.fine{font-size:10px;color:#8fa4c0;margin-top:8px}.no-data{height:100%;min-height:100px;display:grid;place-items:center;color:#7287a5;font-size:12px}
+.mode-toggle{display:inline-flex;gap:4px;background:#0c1525;padding:4px;border-radius:10px;border:1px solid var(--line);margin-bottom:14px}.mode-btn{border:none;background:transparent;color:var(--muted);padding:7px 14px;border-radius:7px;font-size:12px;cursor:pointer;font-weight:600;transition:.15s}.mode-btn.active{background:#203454;color:var(--cyan);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+@media(max-width:1100px){.status-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.reading-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.connect-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.lower-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.reading-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{padding:14px}.top{align-items:flex-start;flex-direction:column}.top-actions{width:100%}.status-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.charts-grid{grid-template-columns:1fr}.connect-grid{grid-template-columns:1fr 1fr}.connect-grid .portfield{grid-column:1/-1}.title{font-size:23px}.card{padding:14px}}
+@media(max-width:400px){.status-grid{grid-template-columns:1fr 1fr}.stat-value{font-size:17px}.connect-grid{grid-template-columns:1fr}.connect-grid .portfield{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">VT</div>
+      <div>
+        <div class="kicker">Wearable research platform</div>
+        <h1 class="title">VENOTRACE <span style="color:var(--cyan);font-weight:450">/ Dashboard</span></h1>
+        <div class="subtitle">Optical sensing · Motion-aware quality screening · Window-based exploratory analysis</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="badge"><span id="connectionDot" class="dot"></span><span id="connectionText">Backend starting…</span></span>
+      <a href="/api/export/samples.csv"><button class="subtle">Export samples CSV</button></a>
+    </div>
+  </header>
+
+  <section class="notice" role="note">
+    <div class="icon">ⓘ</div>
+    <div><strong>Research prototype — not for DVT diagnosis</strong><p>The MAX30102 measures reflected red/infrared light; the MPU6050 measures movement. These signals cannot independently confirm or rule out a deep-vein thrombosis. Model output is disabled until separately trained and validated. Do not use this dashboard to make clinical decisions.</p></div>
+  </section>
+
+  <section class="grid status-grid" aria-label="System status">
+    <div class="card"><div class="stat-label">Serial connection <span>01</span></div><div id="serialStat" class="stat-value status-word">Disconnected</div><div id="serialFoot" class="stat-foot">Connect ESP32 over USB</div></div>
+    <div class="card"><div class="stat-label">MAX30102 optical sensor <span>02</span></div><div id="opticalStat" class="stat-value status-word">Unknown</div><div id="opticalFoot" class="stat-foot">Expected I²C address: 0x57</div></div>
+    <div class="card"><div class="stat-label">MPU6050 motion sensor <span>03</span></div><div id="imuStat" class="stat-value status-word">Unknown</div><div id="imuFoot" class="stat-foot">Expected I²C address: 0x68 / 0x69</div></div>
+    <div class="card"><div class="stat-label">Optical contact quality <span>04</span></div><div id="contactStat" class="stat-value status-word">Waiting</div><div id="contactFoot" class="stat-foot">Based on firmware quality flags</div></div>
+    <div class="card"><div class="stat-label">Research model <span>05</span></div><div id="modelStat" class="stat-value status-word">NO_MODEL</div><div id="modelFoot" class="stat-foot">Prediction disabled</div></div>
+  </section>
+
+  <section class="card section">
+    <div class="section-head">
+      <div>
+        <h2>Device connection</h2>
+        <p>Connect over ESP32 Wi-Fi Hotspot (wireless) or physical USB Serial cable.</p>
+      </div>
+      <span id="connTag" class="section-tag">Wi-Fi & USB</span>
+    </div>
+
+    <div class="mode-toggle">
+      <button id="modeWifiBtn" class="mode-btn active" type="button">📶 Wi-Fi Hotspot (192.168.4.1)</button>
+      <button id="modeSerialBtn" class="mode-btn" type="button">🔌 USB Serial (COM)</button>
+    </div>
+
+    <!-- Wi-Fi Connection Form -->
+    <div id="wifiControls" class="grid connect-grid">
+      <div class="field"><label for="wifiHost">ESP32 Hotspot IP</label><input id="wifiHost" value="192.168.4.1"></div>
+      <div class="field"><label for="wifiPort">TCP Stream Port</label><input id="wifiPort" type="number" value="8888"></div>
+      <div class="field"><label>Hotspot Details</label><input value="SSID: VENOTRACE_ESP32 · Open (No password)" readonly></div>
+      <a href="http://192.168.4.1" target="_blank" rel="noopener"><button type="button" class="subtle" title="Open ESP32 direct on-chip monitor in browser">🌐 Open ESP32 Webpage</button></a>
+      <button id="connectWifiBtn" class="primary">Connect over Wi-Fi</button>
+    </div>
+
+    <!-- Serial Connection Form -->
+    <div id="serialControls" class="grid connect-grid" style="display:none">
+      <div class="field portfield"><label for="portSelect">Serial port</label><select id="portSelect"><option value="">Loading available ports…</option></select></div>
+      <div class="field"><label for="baudSelect">Baud rate</label><select id="baudSelect"><option>115200</option><option>57600</option><option>38400</option><option>19200</option><option>9600</option></select></div>
+      <div class="field"><label>Firmware format</label><input value="D / W / P tagged CSV" readonly></div>
+      <button id="scanBtn" class="subtle">Refresh ports</button>
+      <button id="connectSerialBtn" class="primary">Connect ESP32</button>
+    </div>
+
+    <div class="row" style="margin-top:12px">
+      <button id="disconnectBtn" class="danger" disabled>Disconnect</button>
+      <span id="connTip" class="subtitle">Join Wi-Fi network 'VENOTRACE_ESP32' from your laptop Wi-Fi menu, then click Connect over Wi-Fi.</span>
+    </div>
+    <div id="backendError" class="backend-error"></div>
+  </section>
+
+  <section class="card section">
+    <div class="section-head"><div><h2>Session metadata and reference labels</h2><p>Metadata is sent to the ESP32 and stamped into subsequent records.</p></div><span class="section-tag">Research session</span></div>
+    <div class="grid session-grid">
+      <div class="field"><label for="subjectId">Subject ID (coded identifier only)</label><input id="subjectId" type="number" min="0" max="9999" value="1" step="1"></div>
+      <div class="field"><label for="siteSelect">Sensor site</label><select id="siteSelect"><option value="0">0 — Left calf</option><option value="1">1 — Right calf</option><option value="2">2 — Left ankle</option><option value="3">3 — Right ankle</option><option value="4">4 — Left thigh</option><option value="5">5 — Right thigh</option></select></div>
+      <div class="field"><label for="phaseSelect">Protocol phase</label><select id="phaseSelect"><option value="0">0 — Rest, supine</option><option value="1">1 — Rest, sitting</option><option value="2">2 — Leg elevated</option><option value="3">3 — Calf pump</option><option value="4">4 — Standing</option><option value="5">5 — Walking</option><option value="6">6 — Recovery</option></select></div>
+      <div class="field"><label for="labelSelect">Reference label</label><select id="labelSelect"><option value="-1">-1 — Unlabelled</option><option value="0">0 — Control / reference-negative</option><option value="1">1 — Reference-positive</option></select></div>
+      <div class="field full"><button id="applySessionBtn" class="primary">Apply session labels to ESP32</button><small>Reference labels must come from an appropriate clinical reference standard in an ethics-approved research study—not from this prototype or symptoms alone. Use coded subject IDs, never names or direct identifiers.</small></div>
+    </div>
+    <div class="row" style="margin-top:13px"><button id="markBtn">Add event marker</button><button id="calBtn" class="subtle">Calibrate IMU (keep still)</button><button id="restBtn" class="subtle">Clear resting reference</button><button id="statusBtn" class="subtle">Query device status</button></div>
+  </section>
+
+  <section class="grid reading-grid section">
+    <div class="card"><div class="stat-label">Latest red raw value</div><div id="redValue" class="stat-value">—</div><div class="stat-foot">Raw optical ADC reading</div></div>
+    <div class="card"><div class="stat-label">Latest infrared raw value</div><div id="irValue" class="stat-value">—</div><div class="stat-foot">Raw optical ADC reading</div></div>
+    <div class="card"><div class="stat-label">Acceleration deviation</div><div id="accValue" class="stat-value">—</div><div class="stat-foot">Magnitude deviation from 1 g</div></div>
+    <div class="card"><div class="stat-label">Sample quality flags (q)</div><div id="qValue" class="stat-value">—</div><div id="qFoot" class="stat-foot">No sample received yet</div></div>
+  </section>
+
+  <section class="grid charts-grid section">
+    <div class="card chart-card"><div class="section-head"><div><h2>Raw optical signal</h2><p>Most recent samples received by the backend.</p></div><span class="section-tag">Red / IR counts</span></div><canvas id="opticalChart" aria-label="Raw red and infrared optical signal chart"></canvas><div class="chart-legend"><span class="legend-item"><span class="swatch" style="background:var(--orange)"></span>Red raw</span><span class="legend-item"><span class="swatch" style="background:var(--cyan)"></span>IR raw</span></div></div>
+    <div class="card chart-card"><div class="section-head"><div><h2>Acceleration deviation</h2><p>Magnitude deviation from gravity.</p></div><span class="section-tag">g</span></div><canvas id="accChart" aria-label="Acceleration deviation chart"></canvas><div class="chart-legend"><span class="legend-item"><span class="swatch" style="background:var(--blue)"></span>Acceleration deviation</span></div></div>
+    <div class="card chart-card"><div class="section-head"><div><h2>Angular speed magnitude</h2><p>Computed from the three gyroscope axes.</p></div><span class="section-tag">Degrees / second</span></div><canvas id="gyroChart" aria-label="Angular speed chart"></canvas><div class="chart-legend"><span class="legend-item"><span class="swatch" style="background:var(--pink)"></span>Angular speed magnitude</span></div></div>
+    <div class="card chart-card"><div class="section-head"><div><h2>Optical variation features</h2><p>Exploratory five-second window features; not direct blood-flow measurements.</p></div><span class="section-tag">Percent</span></div><canvas id="featureChart" aria-label="Optical variation features chart"></canvas><div class="chart-legend"><span class="legend-item"><span class="swatch" style="background:var(--cyan)"></span>IR variation %</span><span class="legend-item"><span class="swatch" style="background:var(--orange)"></span>Red variation %</span></div></div>
+  </section>
+
+  <section class="grid lower-grid section">
+    <div class="card">
+      <div class="section-head"><div><h2>Five-second feature windows</h2><p>Only firmware-qualified samples count toward a valid window. Check quality status before interpreting features.</p></div><div class="exports"><a href="/api/export/windows.csv"><button class="subtle">Export windows</button></a></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Window</th><th>Subject</th><th>Site</th><th>Phase</th><th>Label</th><th>Valid samples</th><th>Valid fraction</th><th>IR variation %</th><th>Red variation %</th><th>Red/IR ratio</th><th>Relative change %</th><th>Quality status</th></tr></thead><tbody id="windowsTable"><tr><td colspan="12" class="empty">Waiting for W rows from ESP32…</td></tr></tbody></table></div>
+      <p class="fine">The firmware’s IR/red variation indices are statistical features derived from optical signals. They are not validated DVT biomarkers.</p>
+    </div>
+    <div class="side-stack">
+      <div class="card">
+        <div class="section-head"><div><h2>Latest model interface</h2><p>Research-only status from firmware P rows.</p></div><span class="section-tag">Disabled</span></div>
+        <div class="key-list"><div class="key-row"><span>Model name</span><strong id="predModel">none</strong></div><div class="key-row"><span>Model status</span><strong id="predStatus">NO_MODEL</strong></div><div class="key-row"><span>Score</span><strong id="predScore">Not available</strong></div><div class="key-row"><span>Flag</span><strong id="predFlag">Not available</strong></div></div>
+        <div class="help"><strong>Interpretation:</strong> `NO_MODEL` means no trained model is integrated. A future research score would still need independent validation and must not be represented as a diagnosis.</div>
+        <div class="exports" style="margin-top:12px"><a href="/api/export/predictions.csv"><button class="subtle">Export model records</button></a></div>
+      </div>
+      <div class="card"><div class="section-head"><div><h2>Quality flag reference</h2><p>`q` is a bitmask; multiple flags can be present.</p></div></div><div class="key-list"><div class="key-row"><span>1</span><strong>MAX30102_DOWN</strong></div><div class="key-row"><span>2</span><strong>IMU_DOWN</strong></div><div class="key-row"><span>4</span><strong>NO_CONTACT</strong></div><div class="key-row"><span>8</span><strong>SATURATED</strong></div><div class="key-row"><span>16</span><strong>MOTION</strong></div><div class="key-row"><span>32</span><strong>WARMUP</strong></div><div class="key-row"><span>q = 0</span><strong>USABLE</strong></div></div></div>
+      <div class="card"><div class="section-head"><div><h2>Device log</h2><p>Firmware diagnostics and backend events.</p></div></div><div id="logList" class="logs"><div class="empty">No device log received yet.</div></div></div>
+    </div>
+  </section>
+
+  <footer class="footer"><span>VENOTRACE research dashboard · Local-first SQLite storage</span><span>Do not use for clinical decisions · No patient names or identifiers should be entered</span></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+const $ = id => document.getElementById(id);
+let lastSampleId = 0;
+let polling = false;
+const palette = {grid:'#263650', muted:'#7287a5', cyan:'#6be4d4', orange:'#ffbd75', blue:'#79a9ff', pink:'#f59ad8'};
+
+function toast(message, ms=3400){const t=$('toast');t.textContent=message;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),ms)}
+async function api(path, options={}){
+  const resp = await fetch(path,{headers:{'Content-Type':'application/json',...(options.headers||{})},...options});
+  let body; try{body=await resp.json()}catch{body={}}
+  if(!resp.ok) throw new Error(body.detail || `Request failed (${resp.status})`);
+  return body;
+}
+function setStatus(el, value, kind='neutral'){
+  $(el).textContent=value ?? 'Unknown';
+  $(el).style.color = kind==='good' ? 'var(--green)' : kind==='bad' ? 'var(--red)' : kind==='warn' ? 'var(--orange)' : 'var(--text)';
+}
+function fmt(v, digits=2){if(v===null||v===undefined||!Number.isFinite(Number(v)))return '—';return Number(v).toLocaleString(undefined,{maximumFractionDigits:digits});}
+function pillStatus(s){const val=String(s??'UNKNOWN');let cls='';if(['OK','USABLE','READING_AVAILABLE','LOW_ACCEL_DEVIATION'].includes(val))cls='ok';else if(['NO_CONTACT','MOTION','POSSIBLE_MOTION','WARMUP','LOW_QUALITY','CHECK_CONTACT','INVALID_WINDOW','NO_REST_BASELINE'].includes(val))cls='warn';else if(['FAIL','SENSOR_DOWN','SATURATED','MAX30102_DOWN','IMU_DOWN'].includes(val))cls='bad';return `<span class="pill ${cls}">${esc(val)}</span>`;}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function siteName(v){return ({0:'Left calf',1:'Right calf',2:'Left ankle',3:'Right ankle',4:'Left thigh',5:'Right thigh'})[v] ?? 'Unknown';}
+function phaseName(v){return ({0:'Rest — supine',1:'Rest — sitting',2:'Leg elevated',3:'Calf pump',4:'Standing',5:'Walking',6:'Recovery'})[v] ?? 'Unknown';}
+function labelName(v){return ({'-1':'Unlabelled','0':'Control / reference-negative','1':'Reference-positive'})[String(v)] ?? 'Unknown';}
+function qualityText(q){if(q===null||q===undefined)return 'Unknown';if(Number(q)===0)return 'USABLE';const m=[[1,'MAX30102_DOWN'],[2,'IMU_DOWN'],[4,'NO_CONTACT'],[8,'SATURATED'],[16,'MOTION'],[32,'WARMUP']];return m.filter(([bit])=>(Number(q)&bit)!==0).map(x=>x[1]).join(' + ')||'USABLE';}
+
+let activeMode = 'wifi';
+
+function setConnectionMode(mode){
+  activeMode = mode;
+  if(mode === 'wifi'){
+    $('modeWifiBtn').classList.add('active');
+    $('modeSerialBtn').classList.remove('active');
+    $('wifiControls').style.display = 'grid';
+    $('serialControls').style.display = 'none';
+    $('connTag').textContent = 'Wi-Fi Hotspot';
+    $('connTip').textContent = "Join Wi-Fi network 'VENOTRACE_ESP32' from your laptop Wi-Fi menu, then click Connect over Wi-Fi.";
+  } else {
+    $('modeSerialBtn').classList.add('active');
+    $('modeWifiBtn').classList.remove('active');
+    $('serialControls').style.display = 'grid';
+    $('wifiControls').style.display = 'none';
+    $('connTag').textContent = 'USB Serial · 115200 baud';
+    $('connTip').textContent = "Close Arduino IDE Serial Monitor before connecting; only one app can usually open a COM port at a time.";
+    loadPorts();
+  }
+}
+
+async function loadPorts(){
+  try{const d=await api('/api/ports');const sel=$('portSelect');const old=sel.value;sel.innerHTML='';
+    if(!d.ports.length){sel.innerHTML='<option value="">No serial ports found</option>';return}
+    d.ports.forEach(p=>{const o=document.createElement('option');o.value=p.device;o.textContent=`${p.device} — ${p.description||'Serial device'}`;sel.appendChild(o)});
+    if(d.ports.some(p=>p.device===old))sel.value=old;
+    else if(d.ports.some(p=>/^COM\d+$/i.test(p.device)))sel.value=d.ports.find(p=>/^COM\d+$/i.test(p.device)).device;
+  }catch(e){$('backendError').textContent='Backend unavailable. Start the Python server using the README instructions.\n'+e.message;}
+}
+
+async function connect(){
+  $('backendError').textContent = '';
+  if(activeMode === 'wifi'){
+    const host = ($('wifiHost').value || '192.168.4.1').trim();
+    const tcp_port = Number($('wifiPort').value) || 8888;
+    try{
+      $('connectWifiBtn').disabled = true;
+      const d = await api('/api/connect', {method: 'POST', body: JSON.stringify({mode: 'wifi', host, tcp_port})});
+      $('backendError').textContent = '';
+      toast(d.message);
+      await refreshAll();
+    } catch(e) {
+      $('backendError').textContent = 'Could not connect to ESP32 Wi-Fi:\n' + e.message + '\n\nMake sure your laptop is connected to Wi-Fi SSID "VENOTRACE_AP".';
+      toast(e.message);
+    } finally {
+      $('connectWifiBtn').disabled = false;
+    }
+  } else {
+    const port=$('portSelect').value;
+    if(!port){toast('No serial port selected. Refresh ports and reconnect.');return}
+    try{
+      $('connectSerialBtn').disabled=true;
+      const d=await api('/api/connect',{method:'POST',body:JSON.stringify({mode:'serial',port,baud:Number($('baudSelect').value)})});
+      $('backendError').textContent='';
+      toast(d.message);
+      await refreshAll();
+    }catch(e){
+      $('backendError').textContent=e.message;
+      toast(e.message);
+    }finally{
+      $('connectSerialBtn').disabled=false;
+    }
+  }
+}
+
+async function disconnect(){try{const d=await api('/api/disconnect',{method:'POST',body:'{}'});toast(d.message);await refreshAll()}catch(e){toast(e.message)}}
+async function sendCommand(command){try{await api('/api/command',{method:'POST',body:JSON.stringify({command})});toast(`Sent: ${command}`)}catch(e){toast(e.message)}}
+async function applySession(){
+  const subject=Number($('subjectId').value),site=Number($('siteSelect').value),phase=Number($('phaseSelect').value),label=Number($('labelSelect').value);
+  if(!Number.isInteger(subject)||subject<0||subject>9999){toast('Subject ID must be an integer from 0 to 9999.');return}
+  const cmds=[`subj ${subject}`,`site ${site}`,`phase ${phase}`,`label ${label}`];
+  try{for(const c of cmds)await api('/api/command',{method:'POST',body:JSON.stringify({command:c})});toast('Session metadata commands sent. Check device log for acknowledgements.')}catch(e){toast(e.message)}
+}
+
+function drawChart(canvasId, series, opts={}){
+  const canvas=$(canvasId);if(!canvas)return;const rect=canvas.getBoundingClientRect();const dpr=window.devicePixelRatio||1;const width=Math.max(280,rect.width);const height=188;
+  canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.height=height+'px';
+  const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,width,height);
+  const pad={l:47,r:12,t:9,b:24};const plotW=width-pad.l-pad.r,plotH=height-pad.t-pad.b;
+  const all=[];series.forEach(s=>(s.values||[]).forEach(v=>{if(v!==null&&v!==undefined&&Number.isFinite(Number(v)))all.push(Number(v))}));
+  if(all.length<2){ctx.fillStyle=palette.muted;ctx.font='12px system-ui';ctx.textAlign='center';ctx.fillText('Waiting for serial data…',width/2,height/2);return}
+  let min=Math.min(...all),max=Math.max(...all);if(min===max){min-=1;max+=1}const margin=(max-min)*.08;min-=margin;max+=margin;
+  ctx.font='10px system-ui';ctx.lineWidth=1;ctx.strokeStyle=palette.grid;ctx.fillStyle=palette.muted;
+  for(let i=0;i<=4;i++){const y=pad.t+plotH*i/4;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(width-pad.r,y);ctx.stroke();const val=max-(max-min)*i/4;ctx.textAlign='right';ctx.fillText(shortNum(val),pad.l-7,y+3)}
+  ctx.strokeStyle=palette.grid;ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+plotH);ctx.lineTo(width-pad.r,pad.t+plotH);ctx.stroke();
+  series.forEach(s=>{const vals=s.values||[];if(vals.length<2)return;ctx.beginPath();ctx.strokeStyle=s.color;ctx.lineWidth=1.8;ctx.lineJoin='round';let started=false;vals.forEach((raw,i)=>{const v=Number(raw);if(raw===null||raw===undefined||!Number.isFinite(v)){started=false;return}const x=pad.l+(vals.length<=1?0:i/(vals.length-1))*plotW;const y=pad.t+(max-v)/(max-min)*plotH;if(!started){ctx.moveTo(x,y);started=true}else ctx.lineTo(x,y)});ctx.stroke()});
+  ctx.textAlign='left';ctx.fillStyle=palette.muted;ctx.fillText('Older',pad.l,height-5);ctx.textAlign='right';ctx.fillText('Latest',width-pad.r,height-5);
+}
+function shortNum(n){const a=Math.abs(n);if(a>=1000000)return (n/1000000).toFixed(1)+'M';if(a>=1000)return (n/1000).toFixed(1)+'k';return n.toFixed(a<10?2:0)}
+function paintCharts(samples, windows){
+  const N=160,s=samples.slice(-N);
+  drawChart('opticalChart',[{values:s.map(x=>x.red),color:palette.orange},{values:s.map(x=>x.ir),color:palette.cyan}]);
+  drawChart('accChart',[{values:s.map(x=>x.acc_dev_g),color:palette.blue}]);
+  drawChart('gyroChart',[{values:s.map(x=>x.gyro_dps),color:palette.pink}]);
+  const w=windows.slice(-100);
+  drawChart('featureChart',[{values:w.map(x=>x.ir_variation_pct),color:palette.cyan},{values:w.map(x=>x.red_variation_pct),color:palette.orange}]);
+}
+function renderWindows(rows){const body=$('windowsTable');if(!rows.length){body.innerHTML='<tr><td colspan="12" class="empty">Waiting for W rows from ESP32…</td></tr>';return}
+  body.innerHTML=rows.slice().reverse().map(w=>`<tr><td>${esc(w.win)}</td><td>${esc(w.subj)}</td><td>${esc(w.site_label||siteName(w.site))}</td><td>${esc(w.phase_label||phaseName(w.phase))}</td><td>${esc(labelName(w.label))}</td><td>${esc(w.n_valid)}</td><td>${w.valid_frac==null?'—':(100*Number(w.valid_frac)).toFixed(0)+'%'}</td><td>${fmt(w.ir_variation_pct,3)}</td><td>${fmt(w.red_variation_pct,3)}</td><td>${fmt(w.red_ir_variation_ratio,3)}</td><td>${fmt(w.relative_change_from_rest_pct,1)}</td><td>${pillStatus(w.status)}</td></tr>`).join('');}
+function renderLogs(rows){const el=$('logList');if(!rows.length){el.innerHTML='<div class="empty">No device log received yet.</div>';return}el.innerHTML=rows.map(r=>`<div class="log"><time>${esc((r.received_at||'').replace('T',' ').replace('Z','').slice(0,19))} · ${esc(r.level||'INFO')}</time>${esc(r.message)}</div>`).join('')}
+async function refreshAll(){if(polling)return;polling=true;try{
+  const [st,sd,wd,pd,ld]=await Promise.all([api('/api/status'),api('/api/samples?limit=300'),api('/api/windows?limit=40'),api('/api/predictions?limit=12'),api('/api/logs?limit=18')]);
+  const connected=!!st.connected;
+  $('connectionDot').className='dot '+(connected?'good':'bad');$('connectionText').textContent=connected?`Connected · ${st.port}`:'Backend ready · ESP32 disconnected';
+  setStatus('serialStat',connected?'Connected':'Disconnected',connected?'good':'bad');$('serialFoot').textContent=connected?`${st.port}`:'Connect over Wi-Fi or USB';
+  setStatus('opticalStat',st.optical||'Unknown',st.optical==='OK'?'good':st.optical==='FAIL'?'bad':'warn');$('opticalFoot').textContent='Expected I²C address: 0x57';
+  setStatus('imuStat',st.imu||'Unknown',st.imu==='OK'?'good':st.imu==='FAIL'?'bad':'warn');$('imuFoot').textContent='Expected I²C address: 0x68 / 0x69';
+  const oq=st.last_optical_status||'WAITING';setStatus('contactStat',oq,oq==='READING_AVAILABLE'?'good':oq==='CHECK_CONTACT'||oq==='WARMUP'?'warn':'neutral');$('contactFoot').textContent='Based on firmware quality flags; not physiological diagnosis';
+  setStatus('modelStat',st.model||'NO_MODEL','warn');$('modelFoot').textContent='No clinically validated model loaded';
+  const samples=sd.samples||[],windows=wd.windows||[],preds=pd.predictions||[];const latest=samples[samples.length-1];
+  if(latest){$('redValue').textContent=fmt(latest.red,0);$('irValue').textContent=fmt(latest.ir,0);$('accValue').textContent=latest.acc_dev_g==null?'—':fmt(latest.acc_dev_g,3)+' g';$('qValue').textContent=latest.q??'—';$('qFoot').textContent=qualityText(latest.q);$('contactStat').textContent=st.last_optical_status||'WAITING';}
+  renderWindows(windows);paintCharts(samples,windows);renderLogs((ld.logs||[]));
+  const pred=preds[preds.length-1];if(pred){$('predModel').textContent=pred.model||'none';$('predStatus').textContent=pred.status||'UNKNOWN';$('predScore').textContent=pred.score==null?'Not available':fmt(pred.score,3);$('predFlag').textContent=pred.flag==null?'Not available':pred.flag;}
+  $('connectWifiBtn').disabled=connected;$('connectSerialBtn').disabled=connected;$('disconnectBtn').disabled=!connected;$('applySessionBtn').disabled=!connected;$('markBtn').disabled=!connected;$('calBtn').disabled=!connected;$('restBtn').disabled=!connected;$('statusBtn').disabled=!connected;
+  if(st.last_error)$('backendError').textContent=st.last_error;
+}catch(e){$('backendError').textContent='Could not refresh dashboard data: '+e.message}finally{polling=false}}
+
+$('modeWifiBtn').addEventListener('click',()=>setConnectionMode('wifi'));
+$('modeSerialBtn').addEventListener('click',()=>setConnectionMode('serial'));
+$('scanBtn').addEventListener('click',loadPorts);
+$('connectWifiBtn').addEventListener('click',connect);
+$('connectSerialBtn').addEventListener('click',connect);
+$('disconnectBtn').addEventListener('click',disconnect);
+$('applySessionBtn').addEventListener('click',applySession);
+$('markBtn').addEventListener('click',()=>sendCommand('mark'));
+$('calBtn').addEventListener('click',()=>{if(confirm('Keep the complete sensor assembly still during calibration. Continue?'))sendCommand('cal')});
+$('restBtn').addEventListener('click',()=>sendCommand('rest'));
+$('statusBtn').addEventListener('click',()=>sendCommand('status'));
+window.addEventListener('resize',()=>{Promise.all([api('/api/samples?limit=300'),api('/api/windows?limit=100')]).then(([s,w])=>paintCharts(s.samples,w.windows)).catch(()=>{})});
+loadPorts();refreshAll();setInterval(refreshAll,1200);
+</script>
+</body>
+</html>
